@@ -15,7 +15,9 @@ LINE = (
 def main() -> int:
     output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "entry.txt").write_text(LINE, encoding="utf-8")
+    entry_path = output_dir / "entry.txt"
+    with entry_path.open("w", encoding="utf-8", newline="") as handle:
+        handle.write(LINE)
     return 0
 
 
